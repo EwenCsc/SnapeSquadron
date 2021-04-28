@@ -1,6 +1,7 @@
 ﻿namespace Spaceship
 {
 	using System;
+	using UI;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -25,7 +26,7 @@
 
 		#region Fields
 		[SerializeField] private float _cooldown = 0.5f;
-		//[SerializeField] private Sprite _cooldownBadge = null;
+		[SerializeField] private Sprite _cooldownBadge = null;
 		[SerializeField] private Sprite _cooldownBadgeFull = null;
 
 		private Image _cooldownFullImage = null;
@@ -42,8 +43,11 @@
 		{
 			//Image cooldownImage = GameObject.Instantiate(logoPrefab, parent.position, Quaternion.identity, parent);
 			//cooldownImage.sprite = _cooldownBadge;
+			Image cooldownImage = Badge.Generate(_cooldownBadge, logoPrefab, parent);
 
-			_cooldownFullImage = GameObject.Instantiate(logoPrefab, parent.position, Quaternion.identity, parent);
+			//_cooldownFullImage = GameObject.Instantiate(logoPrefab, parent.position, Quaternion.identity, parent);
+			_cooldownFullImage = Badge.Generate(_cooldownBadgeFull, logoPrefab, parent);
+			_cooldownFullImage.transform.SetParent(cooldownImage.transform);
 			_cooldownFullImage.sprite = _cooldownBadgeFull;
 			_cooldownFullImage.color = new Color(1, 1, 1, 0.7f);
 			_cooldownFullImage.type = Image.Type.Filled;
