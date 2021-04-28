@@ -14,14 +14,14 @@
 		#endregion Properties
 
 		#region Methods
-		public void Init(IWeapon owner)
+		public virtual void Init(IWeapon owner)
 		{
 			_owner = owner;
 
 			_owner.WeaponFire += OnFire;
 		}
 
-		public abstract void UpdateComponent();
+		public virtual void UpdateComponent() { }
 
 		public abstract bool AllowFire();
 
