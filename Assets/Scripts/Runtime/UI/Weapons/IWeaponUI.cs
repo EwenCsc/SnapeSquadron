@@ -1,8 +1,10 @@
 ﻿namespace UI
 {
 	using Spaceship;
+	using System;
 	using UnityEngine;
 
+	[Obsolete]
 	public abstract class IWeaponUI<TWeapon> : IUI where
 		TWeapon : IWeapon
 	{
@@ -19,7 +21,7 @@
 		#endregion Properties
 
 		#region Methods
-		public override void Init(Object owner)
+		public override void Init(UnityEngine.Object owner)
 		{
 			SetOwner(owner as TWeapon);
 		}

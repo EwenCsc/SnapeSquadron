@@ -2,6 +2,9 @@
 {
 	using UnityEngine;
 
+	/// <summary>
+	/// <see cref="Bullet"/> is a basic projectile with no specific behaviour.
+	/// </summary>
 	[RequireComponent(typeof(Rigidbody))]
 	public class Bullet : IProjectile<Bullet>
 	{

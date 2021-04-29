@@ -1,11 +1,13 @@
 ﻿namespace UI
 {
+	using System;
 	using UnityEngine;
 
+	[Obsolete]
 	public abstract class IUI : MonoBehaviour
 	{
 		#region Methods
-		public abstract void Init(Object owner);
+		public abstract void Init(UnityEngine.Object owner);
 
 		public void Activate()
 		{

@@ -5,6 +5,9 @@
 	using UI;
 	using UnityEngine;
 
+	/// <summary>
+	/// <see cref="IWeapon"/> is a generic Object which will be use by a <see cref="SpaceshipController"/> to shoot its opponents.
+	/// </summary>
 	public abstract class IWeapon : MonoBehaviour 
 	{
 		#region Enums
@@ -56,6 +59,10 @@
 		#endregion Properties
 
 		#region Methods
+		/// <summary>
+		/// Init the <see cref="IWeapon"/>
+		/// </summary>
+		/// <param name="owner"><see cref="SpaceshipController"/> which control this <see cref="IWeapon"/></param>
 		public virtual void Init(SpaceshipController owner)
 		{
 			_spaceship = owner;
@@ -66,6 +73,7 @@
 			//}
 		}
 
+		[Obsolete]
 		public void DeactivateUI()
 		{
 			//if (_ui != null)
@@ -78,6 +86,7 @@
 			//}
 		}
 
+		[Obsolete]
 		public void ActivateUI()
 		{
 			//if (_ui != null)
@@ -90,7 +99,11 @@
 			//}
 		}
 
-		private bool CanShoot()
+		/// <summary>
+		/// Check each <see cref="IWeaponComponent"/> if their condtions are ok to allow the fireing. 
+		/// </summary>
+		/// <returns><see langword="true"/> if this <see cref="IWeapon"/> can fire.</returns>
+		private bool AllowFire()
 		{
 			foreach (IWeaponComponent weaponComponent in _weaponComponents)
 			{
@@ -103,6 +116,10 @@
 			return true;
 		}
 
+		/// <summary>
+		/// Fetch and Init specified <see cref="IWeaponComponent"/>s of the <see cref="IWeapon"/>. 
+		/// </summary>
+		/// <param name="weaponComponents">The <see cref="IWeaponComponent"/>s of the <see cref="IWeapon"/></param>
 		protected void FetchWeaponComponents(params IWeaponComponent[] weaponComponents)
 		{
 			foreach (IWeaponComponent component in weaponComponents)
@@ -112,7 +129,10 @@
 			}
 		}
 
-		#region Interface
+		/// <summary>
+		/// Every frames logic of the <see cref="IWeapon"/>
+		/// (If the <see cref="IWeapon"/> is currently used)
+		/// </summary>
 		public virtual void UpdateWeapon()
 		{
 			foreach (IWeaponComponent weaponComponent in _weaponComponents)
@@ -123,8 +143,10 @@
 			TryFire();
 		}
 
-		protected abstract void Fire(Transform muzzle);
-
+		/// <summary>
+		/// Check all the different conditions to fire as Inputs or IWeaponComponent states and call Fire if available.
+		/// Called each UpdateWeapon().
+		/// </summary>
 		protected virtual bool TryFire()
 		{
 			switch (_inputMode)
@@ -145,7 +167,7 @@
 					return false;
 			}
 
-			if (CanShoot())
+			if (AllowFire())
 			{
 				if (_weaponFireEventHandler != null)
 				{
@@ -157,7 +179,12 @@
 
 			return false;
 		}
-		#endregion Interface
+
+		/// <summary>
+		/// Contains the weapon when it have to fire.
+		/// </summary>
+		/// <param name="muzzle"></param>
+		protected abstract void Fire(Transform muzzle);
 		#endregion Methods
 	}
 }

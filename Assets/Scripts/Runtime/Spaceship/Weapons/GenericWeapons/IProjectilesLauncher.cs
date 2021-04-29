@@ -2,6 +2,10 @@
 {
 	using UnityEngine;
 
+	/// <summary>
+	/// <see cref="IProjectilesLauncher"/> is a generic <see cref="IWeapon"/> which will fire projectils
+	/// </summary>
+	/// <typeparam name="TProjectile">It's the <see cref="IProjectile"/> which will be launch</typeparam>
 	public abstract class IProjectilesLauncher<TProjectile> : IWeapon where
 		TProjectile : IProjectile<TProjectile>
 	{
@@ -13,22 +17,22 @@
 		#endregion Fields
 
 		#region Propertied
-		public TProjectile ProjectilePrefab { get => _projectilePrefab; }
-
 		public Pool<TProjectile> Projectiles { get => _projectiles; }
 		#endregion Propertied
 
 		#region Methods
+		/// <inheritdoc/>
 		public override void Init(SpaceshipController owner)
 		{
 			base.Init(owner);
 
 			if (_projectiles == null)
 			{
-				_projectiles = new Pool<TProjectile>(ProjectilePrefab);
+				_projectiles = new Pool<TProjectile>(_projectilePrefab);
 			}
 		}
 
+		/// <inheritdoc/>
 		protected override bool TryFire()
 		{
 			if (base.TryFire() == true)

@@ -3,8 +3,14 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 
+	/// <summary>
+	/// Little badge in the right corner of an UI element.
+	/// </summary>
 	public class Badge
 	{
+		/// <summary>
+		/// [PRETTY HARDCODED]
+		/// </summary>
 		public static Image Generate(Sprite sprite, Image imagePrefab, Transform parent)
 		{
 			Image image = Object.Instantiate(imagePrefab, parent);

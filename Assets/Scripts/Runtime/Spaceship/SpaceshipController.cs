@@ -4,6 +4,10 @@
 	using UI;
 	using UnityEngine;
 
+	/// <summary>
+	/// The Controller of the Spaceship
+	/// TODO -> Disociates Player Controller and Spaceship Controller.
+	/// </summary>
 	[RequireComponent(typeof(Rigidbody))]
 	public class SpaceshipController : MonoBehaviour
 	{

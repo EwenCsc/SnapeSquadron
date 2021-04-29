@@ -3,6 +3,9 @@
 	using System;
 	using UnityEngine;
 
+	/// <summary>
+	/// Manage the overheating of a <see cref="IWeapon"/>
+	/// </summary>
 	[Serializable]
 	public class HeatComponent : IWeaponComponent
 	{
@@ -31,6 +34,7 @@
 		#endregion Fields
 
 		#region Methods
+		/// <inheritdoc/>
 		public override void UpdateComponent()
 		{
 			float lastValue = _currentHeating;
@@ -42,11 +46,13 @@
 			}
 		}
 
+		/// <inheritdoc/>
 		public override bool AllowFire()
 		{
 			return _currentHeating < _maxOverheat;
 		}
 
+		/// <inheritdoc/>
 		protected override void OnFire()
 		{
 			float lastValue = _currentHeating;

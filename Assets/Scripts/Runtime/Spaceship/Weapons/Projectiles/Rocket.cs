@@ -3,6 +3,9 @@
 	using System;
 	using UnityEngine;
 
+	/// <summary>
+	/// A projectile which follow a target and explode when it touches the target.
+	/// </summary>
 	public class Rocket : IProjectile<Rocket>
 	{
 		#region Events
@@ -39,16 +42,26 @@
 			_rigidbody = GetComponent<Rigidbody>();
 		}
 
+		/// <summary>
+		/// Set the followed <see cref="Transform"/>.
+		/// </summary>
+		/// <param name="target"></param>
 		public void SetTarget(Transform target)
 		{
 			_target = target;
 		}
 
+		/// <summary>
+		/// Set the max speed of the <see cref="Rocket"/>
+		/// </summary>
 		public void SetSpeed(float speed)
 		{
 			_speed = speed;
 		}
 
+		/// <summary>
+		/// Set the sensibility of the Rocket to brutaly change direction.
+		/// </summary>
 		public void SetSteeringSensibility(float steeringSensibility)
 		{
 			_steeringSensibility = steeringSensibility;

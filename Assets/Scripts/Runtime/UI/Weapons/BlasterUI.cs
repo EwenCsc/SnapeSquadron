@@ -1,9 +1,11 @@
 ﻿namespace UI
 {
 	using Spaceship;
+	using System;
 	using UnityEngine;
 	using UnityEngine.UI;
 
+	[Obsolete]
 	public class BlasterUI : IWeaponUI<Blaster>
 	{
 		#region Fields
@@ -13,7 +15,7 @@
 		#endregion Fields
 
 		#region Methods
-		public override void Init(Object owner)
+		public override void Init(UnityEngine.Object owner)
 		{
 			base.Init(owner);
 

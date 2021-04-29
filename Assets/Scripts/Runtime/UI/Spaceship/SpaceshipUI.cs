@@ -6,6 +6,9 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 
+	/// <summary>
+	/// UI Handler of the spaceship
+	/// </summary>
 	public class SpaceshipUI : MonoBehaviour
 	{
 		#region Fields
@@ -46,7 +49,7 @@
 
 				foreach(IWeaponComponent component in components)
 				{
-					component.GenerateBadge(_logoPrefab, image.transform);
+					component.GenerateUI(_logoPrefab, image.transform);
 				}
 			}
 

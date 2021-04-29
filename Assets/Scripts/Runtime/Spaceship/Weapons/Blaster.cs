@@ -2,6 +2,9 @@
 {
 	using UnityEngine;
 
+	/// <summary>
+	/// Basic gun with infinit ammunition and no overheating.
+	/// </summary>
 	public class Blaster : IProjectilesLauncher<Bullet>
 	{
 		#region Fields
@@ -13,6 +16,7 @@
 		#endregion Fields
 
 		#region Methods
+		/// <inheritdoc/>
 		public override void Init(SpaceshipController owner)
 		{
 			base.Init(owner);
@@ -20,6 +24,7 @@
 			FetchWeaponComponents(_cooldownComponent);
 		}
 
+		/// <inheritdoc/>
 		protected override void Fire(Transform muzzle)
 		{
 			Bullet projectile = Projectiles.GetElement();

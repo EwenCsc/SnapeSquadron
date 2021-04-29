@@ -5,6 +5,9 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 
+	/// <summary>
+	/// Manage the logic the Cooldown of the <see cref="IWeapon"/>
+	/// </summary>
 	[Serializable]
 	public class CooldownComponent : IWeaponComponent
 	{
@@ -39,13 +42,11 @@
 		#endregion Properties
 
 		#region Methods
-		public override void GenerateBadge(Image logoPrefab, Transform parent)
+		/// <inheritdoc/>
+		public override void GenerateUI(Image logoPrefab, Transform parent)
 		{
-			//Image cooldownImage = GameObject.Instantiate(logoPrefab, parent.position, Quaternion.identity, parent);
-			//cooldownImage.sprite = _cooldownBadge;
 			Image cooldownImage = Badge.Generate(_cooldownBadge, logoPrefab, parent);
 
-			//_cooldownFullImage = GameObject.Instantiate(logoPrefab, parent.position, Quaternion.identity, parent);
 			_cooldownFullImage = Badge.Generate(_cooldownBadgeFull, logoPrefab, parent);
 			_cooldownFullImage.transform.SetParent(cooldownImage.transform);
 			_cooldownFullImage.sprite = _cooldownBadgeFull;
@@ -57,6 +58,9 @@
 			UpdateCooldown += OnUpdateCooldown;
 		}
 
+		/// <summary>
+		/// return a <see cref="float"/> between 0 and 1 matching with cooldown porcent.
+		/// </summary>
 		public float GetCooldownLevel()
 		{
 			if (_cooldown == 0)
@@ -67,7 +71,7 @@
 			return _currentCooldown / _cooldown;
 		}
 
-		#region Interface
+		/// <inheritdoc/>
 		public override void UpdateComponent()
 		{
 			if (_currentCooldown > 0)
@@ -82,23 +86,27 @@
 			}
 		}
 
+		/// <inheritdoc/>
 		public override bool AllowFire()
 		{
 
 			return _currentCooldown == 0.0f;
 		}
 
+		/// <inheritdoc/>
 		protected override void OnFire()
 		{
 
 			_currentCooldown = _cooldown;
 		}
 
+		/// <summary>
+		/// Logic when the _currentCooldown is modified.
+		/// </summary>
 		private void OnUpdateCooldown()
 		{
 			_cooldownFullImage.fillAmount = GetCooldownLevel();
 		}
-		#endregion Interface
 		#endregion Methods
 	}
 }
